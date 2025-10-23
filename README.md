@@ -2,9 +2,6 @@
 
 A powerful Blender addon to automatically, intelligently, and stylishly color Frame nodes in the Shader Editor. Say goodbye to gray, disorganized node trees and work more efficiently with a visually appealing system.
 
-![GIF of the addon in action](https://raw.githubusercontent.com/BlenPy/Blender-Smart-Frame-Colorizer/main/docs/sfc_demo.gif)
-*(A short GIF showing the main features, such as automatic coloring and applying rules.)*
-
 ---
 
 ## ✨ Key Features
