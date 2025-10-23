@@ -1,65 +1,146 @@
 {
     "palettes": [
         {
-            "name": "Sunset",
+            "name": "Weighted Greys",
+            "sampling_mode": "WEIGHTED",
+            "gradient_interpolation": "LINEAR",
             "colors": [
-                [
-                    0.8999999761581421,
-                    0.30000001192092896,
-                    0.10000000149011612
-                ],
-                [
-                    0.8999999761581421,
-                    0.6000000238418579,
-                    0.20000000298023224
-                ],
-                [
-                    0.4000000059604645,
-                    0.10000000149011612,
-                    0.20000000298023224
-                ]
+                {
+                    "color": [
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806
+                    ],
+                    "weight": 70.0,
+                    "position": 0.0
+                },
+                {
+                    "color": [
+                        0.800000011920929,
+                        0.800000011920929,
+                        0.800000011920929
+                    ],
+                    "weight": 25.0,
+                    "position": 0.5
+                },
+                {
+                    "color": [
+                        1.0,
+                        0.0,
+                        0.0
+                    ],
+                    "weight": 5.0,
+                    "position": 1.0
+                }
+            ]
+        },
+        {
+            "name": "Sunset Gradient",
+            "sampling_mode": "GRADIENT",
+            "gradient_interpolation": "EASE",
+            "colors": [
+                {
+                    "color": [
+                        0.05000000074505806,
+                        0.019999999552965164,
+                        0.10000000149011612
+                    ],
+                    "weight": 1.0,
+                    "position": 0.0
+                },
+                {
+                    "color": [
+                        1.0,
+                        0.20000000298023224,
+                        0.0
+                    ],
+                    "weight": 1.0,
+                    "position": 0.6000000238418579
+                },
+                {
+                    "color": [
+                        1.0,
+                        0.800000011920929,
+                        0.4000000059604645
+                    ],
+                    "weight": 1.0,
+                    "position": 1.0
+                }
+            ]
+        },
+        {
+            "name": "Sequential",
+            "sampling_mode": "SEQUENTIAL",
+            "gradient_interpolation": "LINEAR",
+            "colors": [
+                {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "weight": 1.0,
+                    "position": 0.0
+                },
+                {
+                    "color": [
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "weight": 1.0,
+                    "position": 1.0
+                }
+            ]
+        },
+        {
+            "name": "New Palette",
+            "sampling_mode": "UNIFORM",
+            "gradient_interpolation": "LINEAR",
+            "colors": [
+                {
+                    "color": [
+                        0.0,
+                        1.0,
+                        0.0012429370544850826
+                    ],
+                    "weight": 1.0,
+                    "position": 0.0
+                },
+                {
+                    "color": [
+                        0.0,
+                        0.0005361056537367404,
+                        1.0
+                    ],
+                    "weight": 1.0,
+                    "position": 1.0
+                }
             ]
         }
     ],
     "node_rules": [
         {
-            "node_type": "ShaderNodeBsdfDiffuse",
-            "mode": "SINGLE",
-            "color": [
-                0.046114481985569,
-                0.8000156879425049,
-                0.07994084805250168
-            ]
-        },
-        {
-            "node_type": "ShaderNodeEmission",
+            "node_type": "ShaderNodeBsdfPrincipled",
             "mode": "PALETTE",
-            "palette_name": "Sunset"
-        },
-        {
-            "node_type": "ShaderNodeOutputAOV",
-            "mode": "SINGLE",
             "color": [
-                0.0009366897866129875,
-                0.0,
-                0.499735563993454
-            ]
+                0.5,
+                0.5,
+                0.5
+            ],
+            "palette_name": "Weighted Greys"
         }
     ],
     "keyword_rules": [
         {
-            "label": "AO",
-            "mode": "SINGLE",
-            "color": [
-                0.3000217080116272,
-                0.04050353169441223,
-                0.03444439172744751
-            ]
-        },
-        {
-            "label": "For",
+            "label": "Sun",
             "mode": "PALETTE",
-            "palette_name": "Sunset"
+            "color": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "palette_name": "Sunset Gradient"
         }
     ]
 }
