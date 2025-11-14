@@ -1,48 +1,48 @@
 {
     "palettes": [
         {
-            "name": "Weighted Greys",
+            "name": "Primary Colors",
             "sampling_mode": "WEIGHTED",
             "gradient_interpolation": "LINEAR",
             "colors": [
                 {
                     "color": [
-                        0.05000000074505806,
+                        1.0,
                         0.05000000074505806,
                         0.05000000074505806
                     ],
-                    "weight": 70.0,
+                    "weight": 60.0,
                     "position": 0.0
                 },
                 {
                     "color": [
-                        0.800000011920929,
-                        0.800000011920929,
-                        0.800000011920929
+                        0.05000000074505806,
+                        1.0,
+                        0.05000000074505806
                     ],
-                    "weight": 25.0,
+                    "weight": 30.0,
                     "position": 0.5
                 },
                 {
                     "color": [
-                        1.0,
-                        0.0,
-                        0.0
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        1.0
                     ],
-                    "weight": 5.0,
+                    "weight": 10.0,
                     "position": 1.0
                 }
             ]
         },
         {
-            "name": "Sunset Gradient",
+            "name": "Grayscale Gradient",
             "sampling_mode": "GRADIENT",
-            "gradient_interpolation": "EASE",
+            "gradient_interpolation": "LINEAR",
             "colors": [
                 {
                     "color": [
-                        0.05000000074505806,
-                        0.019999999552965164,
+                        0.10000000149011612,
+                        0.10000000149011612,
                         0.10000000149011612
                     ],
                     "weight": 1.0,
@@ -50,68 +50,9 @@
                 },
                 {
                     "color": [
-                        1.0,
-                        0.20000000298023224,
-                        0.0
-                    ],
-                    "weight": 1.0,
-                    "position": 0.6000000238418579
-                },
-                {
-                    "color": [
-                        1.0,
-                        0.800000011920929,
-                        0.4000000059604645
-                    ],
-                    "weight": 1.0,
-                    "position": 1.0
-                }
-            ]
-        },
-        {
-            "name": "Sequential",
-            "sampling_mode": "SEQUENTIAL",
-            "gradient_interpolation": "LINEAR",
-            "colors": [
-                {
-                    "color": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "weight": 1.0,
-                    "position": 0.0
-                },
-                {
-                    "color": [
-                        0.0,
-                        0.0,
-                        0.0
-                    ],
-                    "weight": 1.0,
-                    "position": 1.0
-                }
-            ]
-        },
-        {
-            "name": "New Palette",
-            "sampling_mode": "UNIFORM",
-            "gradient_interpolation": "LINEAR",
-            "colors": [
-                {
-                    "color": [
-                        0.0,
-                        1.0,
-                        0.0012429370544850826
-                    ],
-                    "weight": 1.0,
-                    "position": 0.0
-                },
-                {
-                    "color": [
-                        0.0,
-                        0.0005361056537367404,
-                        1.0
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421
                     ],
                     "weight": 1.0,
                     "position": 1.0
@@ -119,28 +60,93 @@
             ]
         }
     ],
-    "node_rules": [
+    "editor_rule_sets": [
         {
-            "node_type": "ShaderNodeBsdfPrincipled",
-            "mode": "PALETTE",
-            "color": [
-                0.5,
-                0.5,
-                0.5
-            ],
-            "palette_name": "Weighted Greys"
-        }
-    ],
-    "keyword_rules": [
+            "name": "SHADER",
+            "rules": [
+                {
+                    "rule_type": "KEYWORD",
+                    "keyword": "Texture",
+                    "node_type": "ShaderNodeOutputAOV",
+                    "mode": "SINGLE",
+                    "color": [
+                        0.5,
+                        0.0,
+                        0.5
+                    ],
+                    "palette_name": ""
+                },
+                {
+                    "rule_type": "NODE_TYPE",
+                    "keyword": "Keyword",
+                    "node_type": "ShaderNodeBsdfPrincipled",
+                    "mode": "PALETTE",
+                    "color": [
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "palette_name": "Primary Colors"
+                }
+            ]
+        },
         {
-            "label": "Sun",
-            "mode": "PALETTE",
-            "color": [
-                1.0,
-                1.0,
-                1.0
-            ],
-            "palette_name": "Sunset Gradient"
+            "name": "GEOMETRY",
+            "rules": [
+                {
+                    "rule_type": "KEYWORD",
+                    "keyword": "Mesh",
+                    "node_type": "GeometryNodeTool3DCursor",
+                    "mode": "SINGLE",
+                    "color": [
+                        0.0,
+                        1.0,
+                        0.10000000149011612
+                    ],
+                    "palette_name": ""
+                },
+                {
+                    "rule_type": "NODE_TYPE",
+                    "keyword": "Keyword",
+                    "node_type": "GeometryNodeInstanceOnPoints",
+                    "mode": "PALETTE",
+                    "color": [
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "palette_name": "Primary Colors"
+                }
+            ]
+        },
+        {
+            "name": "COMPOSITOR",
+            "rules": [
+                {
+                    "rule_type": "KEYWORD",
+                    "keyword": "Correction",
+                    "node_type": "CompositorNodePremulKey",
+                    "mode": "SINGLE",
+                    "color": [
+                        0.0,
+                        1.0,
+                        0.06134247034788132
+                    ],
+                    "palette_name": ""
+                },
+                {
+                    "rule_type": "NODE_TYPE",
+                    "keyword": "Keyword",
+                    "node_type": "CompositorNodeBlur",
+                    "mode": "PALETTE",
+                    "color": [
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "palette_name": "Primary Colors"
+                }
+            ]
         }
     ]
 }
