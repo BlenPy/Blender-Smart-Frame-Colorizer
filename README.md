@@ -1,93 +1,105 @@
 # Blender Smart Frame Colorizer
 
-A powerful Blender addon to automatically, intelligently, and stylishly color Frame nodes in the Shader Editor. Say goodbye to gray, disorganized node trees and work more efficiently with a visually appealing system.
+A powerful Blender addon that revolutionizes your node workflows by automatically coloring Frame nodes. Use a powerful, priority-based rule system to intelligently organize your Shader, Geometry, and Compositor node trees.
+
+Stop wasting time manually coloring frames and let the addon do it for you. Define a set of rules, and let every frame automatically get the right color based on its content or label.
 
 ---
 
 ## ✨ Key Features
 
-* **🎨 Auto-Coloring:** Every newly created Frame node is instantly colored.
-* **룰 Rule-Based System:** Define custom rules to color frames based on their **label (keywords)** or the **nodes they contain**.
-* **🎨 Advanced Color Palettes:** Create color palettes and pick colors from them using various modes:
-    * **Uniform:** Selects a random color from the palette.
-    * **Weighted:** Selects colors based on a probability you define.
-    * **Sequential:** Cycles through the colors of the palette in order.
-    * **Gradient:** Generates colors from a gradient that you can define with multiple color stops (including linear and ease interpolation).
-* **⚡️ Quick Manual Control:**
-    * A **Quick-Color Popup** to swiftly assign a color to selected frames.
-    * Operators to apply rules to all or only selected frames.
-    * Easily reset colors back to their default.
-* **⌨️ Full Shortcut Support:** All important functions are accessible via shortcuts in the Node Editor.
-* **💾 Config Import/Export:** Save and load your entire set of rules and palettes as a `.json` file. Perfect for sharing your configuration across projects or for backups.
-* **🛠️ Developer Tools:** An experimental "Palette Tester" that generates an image to visualize the color distribution of your palettes.
+* **Works in 3 Editors:** Create and manage separate rule sets for the **Shader**, **Geometry**, and **Compositor** node editors.
+* **Prioritized Rule System:** Rules are applied from top-to-bottom. The first rule that matches a frame wins. Simply drag rules up or down to change their priority.
+* **Live Auto-Coloring:** Frames are colored automatically as you create them or update your node tree. No extra clicks needed.
+* **Two Powerful Rule Types:**
+    * **Keyword:** Colors a frame if its `Label` contains a specific word (e.g., "UVs", "Mask", "Control").
+    * **Node Type:** Colors a frame if it contains a specific node (e.g., `Image Texture`, `Mix`, `Group Input`).
+* **Advanced Color Palettes:** Go beyond single colors. Create palettes that assign colors using different modes:
+    * **Uniform:** A random color from the palette.
+    * **Weighted:** A random color, but with a defined probability for each.
+    * **Gradient:** A random color sampled from a multi-stop gradient (with `Linear` or `Ease` interpolation).
+    * **Sequential:** Cycles through the palette's colors in order.
+* **Full Manual Control:** Use the N-Panel for quick operations like `Update All Frames`, `Reset Selected`, or use the `Quick Color` popup.
+* **Full Shortcut Support:** All major operations are mapped to `Shift + Alt` shortcuts for maximum speed.
+* **Import/Export Your Setup:** Save your entire rules and palettes configuration to a `.json` file to share, back up, or transfer to another computer.
 
 ---
 
 ## 🚀 Installation
 
-1.  Download the latest version of the addon from the [Releases page](https://github.com/BlenPy/Blender-Smart-Frame-Colorizer/releases) (download the `.zip` file).
-2.  Open Blender and go to `Edit -> Preferences -> Add-ons`.
-3.  Click `Install...` and select the downloaded `.zip` file.
+1.  Download the latest `Smart_Frame_Colorizer.zip` file from the [Releases](https://github.com/BlenPy/Blender-Smart-Frame-Colorizer/releases) page.
+2.  In Blender, go to `Edit` > `Preferences` > `Add-ons`.
+3.  Click `Install...` and select the `.zip` file you downloaded.
 4.  Enable the addon by checking the box next to "Smart Frame Colorizer".
 
 ---
 
-## 📖 Usage
+## 📖 How to Use
 
-You can find the main panel of the addon in the **Shader Editor**. Press `N` to open the sidebar, and click on the **"Tool"** tab.
+The addon has two parts: the quick-access **Tool Panel** in the Node Editor and the main **Addon Preferences** where you build your logic.
 
-### Basics
+### 1. Quick Controls (Node Editor N-Panel)
 
-* **Auto Color:** Toggles the automatic coloring of new frames on or off.
-* **Color Mode:** Choose between two main modes:
-    * **Random:** Colors new frames with a completely random color (default).
-    * **By Rules:** Uses the rule and palette system described below.
+In the Node Editor, press `N` to open the sidebar and click the **"Tool"** tab. Here you will find the main operators:
 
-### Creating Rules and Palettes (in the Addon Preferences)
+* **Quick Color Popup:** (`Shift+Alt+Q`) Instantly apply any color to the selected frames.
+* **Update Selected/All:** (`Shift+Alt+U` / `Shift+Alt+A`) Force the addon to re-apply your rules to the selected frames or all frames in the tree.
+* **Reset Selected/All:** (`Shift+Alt+R` / `Shift+Alt+X`) Remove the custom color from frames.
+* **Fallback to Random:** If no rules match a frame, this option will assign it a random color instead of leaving it gray.
 
-To create rules, open the addon preferences (`Edit -> Preferences -> Add-ons` and search for "Smart Frame Colorizer").
+### 2. The Main Setup (Addon Preferences)
 
-1.  **Set the `Color Mode` to `By Rules`.**
-2.  **Create Palettes:**
-    * Go to the "Palettes" section and create a new palette.
-    * Give it a name and choose a `Sampling Mode` (e.g., `Gradient`).
-    * Add colors ("Swatches"). Depending on the mode, you can also set the `Weight` or the `Position` on the gradient here.
-3.  **Create Rules:**
-    * **Keyword-Based Rules:** Triggered if the frame's label contains the keyword (e.g., a rule with the keyword "UVs" will color all frames that have "UVs" in their label).
-    * **Node-Based Rules:** Triggered if a node of a specific type (e.g., an `Image Texture` node) is inside the frame.
-4.  **Link Rules to Palettes:**
-    * In each rule, you can set the `Mode` to `Use Palette` and enter the name of one of your created palettes.
+This is the "brain" of the addon. Go to `Edit` > `Preferences` > `Add-ons` and find "Smart Frame Colorizer".
 
-### Manual Control (in the N-Panel)
+Set the **Color Mode** to **"By Rules"** to enable the system. The preferences are split into three tabs:
 
-* **Quick Color Popup:** Select one or more frames and click this to choose a color from a picker and apply it directly.
-* **Update Selected/All:** Manually apply your defined rules to the selected frames or to all frames in the current node tree.
-* **Reset Selected/All:** Removes the custom color from the selected or all frames.
+#### 🎨 **Palettes** Tab
+This is where you create your color sets.
 
-### Shortcuts (in the Node Editor)
+1.  Click `+` to add a new palette (e.g., "Texture Pal").
+2.  Select its `Sampling Mode` (e.g., `Uniform`).
+3.  Add colors to it using the `+` button in the right-hand list.
 
-All shortcuts use the `Shift + Alt` combination.
+#### 룰 **Rules** Tab
+This is where you define the logic.
 
-| Action                 | Shortcut            |
-| :--------------------- | :------------------ |
-| Quick Color Popup      | `Shift + Alt + Q`   |
-| Update Selected Frames | `Shift + Alt + U`   |
-| Update All Frames      | `Shift + Alt + A`   |
-| Reset Selected Frames  | `Shift + Alt + R`   |
-| Reset All Frames       | `Shift + Alt + X`   |
-| Toggle Developer Mode  | `Ctrl + Alt + D`    |
+1.  First, select which editor you want to create rules for: **Shader**, **Geometry**, or **Compositor**. Each editor has its own independent list of rules.
+2.  Click the `+` button to add a new rule.
+3.  **Set the Priority:** Use the **Up/Down arrows** to move the rule. **Rules are checked from top to bottom. The first one that matches wins.**
+4.  **Configure the Rule:**
+    * **Rule Type:** Choose `Keyword` or `Node Type`.
+    * **Mode:** Choose `Single Color` (and pick a color) or `Use Palette` (and select a palette you made).
 
-### Saving & Loading Configuration
+> **Example Rule:**
+> * **Editor:** `Shader`
+> * **Rule 1:** `Rule Type: Node Type` > `Node: Image Texture` > `Mode: Use Palette` > `Palette: Texture Pal`
+> * **Rule 2:** `Rule Type: Keyword` > `Keyword: Math` > `Mode: Single Color` > `Color: (Blue)`
+>
+> Now, any frame containing an `Image Texture` node will get a color from your "Texture Pal," and any frame with "Math" in its label will turn blue.
 
-In the addon preferences, you can specify a file path for a `.json` file.
-* **Save:** Saves all your current rules and palettes to this file.
-* **Load:** Clears your current settings and loads the configuration from the file.
+#### ⚙️ **Settings** Tab
+General settings for the addon.
+
+* **Auto Color:** Automatically color frames when the node tree updates. Turn this off if you prefer to run updates manually.
+* **Config Import/Export:** Save or load your complete setup (all rules and palettes) from a `.json` file.
+* **Backward Compatibility:** This addon can successfully load `.json` files created by older versions. Old rules will be automatically placed in the **Shader** rule set.
+
+---
+
+## ⌨️ Shortcuts
+
+All shortcuts are in the Node Editor and use the `Shift + Alt` modifier.
+
+| Action | Shortcut |
+| :--- | :--- |
+| **Quick Color Popup** | `Shift + Alt + Q` |
+| **Update Selected Frames** | `Shift + Alt + U` |
+| **Update All Frames** | `Shift + Alt + A` |
+| **Reset Selected Frames** | `Shift + Alt + R` |
+| **Reset All Frames** | `Shift + Alt + X` |
 
 ---
 
-## 🛠️ Developer Tools
+## License
 
-Activate "Developer Mode" in the addon preferences or by using `Ctrl + Alt + D`.
-This will make the **"Test Palette Distribution"** button visible in the palette settings. Clicking it will generate a new image in the **Image Editor**, showing a visual preview of your palette's color distribution based on the selected sampling mode.
-
----
+This project is licensed under the MIT License.
