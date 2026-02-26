@@ -1,6 +1,6 @@
 # Blender Smart Frame Colorizer
 
-A powerful Blender addon that revolutionizes your node workflows by automatically coloring Frame nodes. Use a powerful, priority-based rule system to intelligently organize your Shader, Geometry, and Compositor node trees.
+A powerful Blender addon that revolutionizes your node workflows by automatically coloring Frame nodes using a powerful, prioritized rule system.
 
 Stop wasting time manually coloring frames and let the addon do it for you. Define a set of rules, and let every frame automatically get the right color based on its content or label.
 
@@ -11,9 +11,10 @@ Stop wasting time manually coloring frames and let the addon do it for you. Defi
 * **Works in 3 Editors:** Create and manage separate rule sets for the **Shader**, **Geometry**, and **Compositor** node editors.
 * **Prioritized Rule System:** Rules are applied from top-to-bottom. The first rule that matches a frame wins. Simply drag rules up or down to change their priority.
 * **Live Auto-Coloring:** Frames are colored automatically as you create them or update your node tree. No extra clicks needed.
-* **Two Powerful Rule Types:**
+* **Three Powerful Rule Types:**
     * **Keyword:** Colors a frame if its `Label` contains a specific word (e.g., "UVs", "Mask", "Control").
     * **Node Type:** Colors a frame if it contains a specific node (e.g., `Image Texture`, `Mix`, `Group Input`).
+    * **Node Group (NEW!):** Match any node type defined in a custom Node Group that you configure.
 * **Advanced Color Palettes:** Go beyond single colors. Create palettes that assign colors using different modes:
     * **Uniform:** A random color from the palette.
     * **Weighted:** A random color, but with a defined probability for each.
@@ -21,7 +22,7 @@ Stop wasting time manually coloring frames and let the addon do it for you. Defi
     * **Sequential:** Cycles through the palette's colors in order.
 * **Full Manual Control:** Use the N-Panel for quick operations like `Update All Frames`, `Reset Selected`, or use the `Quick Color` popup.
 * **Full Shortcut Support:** All major operations are mapped to `Shift + Alt` shortcuts for maximum speed.
-* **Import/Export Your Setup:** Save your entire rules and palettes configuration to a `.json` file to share, back up, or transfer to another computer.
+* **Import/Export Your Setup:** Save your entire rules, node groups, and palettes configuration to a `.json` file to share, back up, or transfer to another computer.
 
 ---
 
@@ -30,7 +31,7 @@ Stop wasting time manually coloring frames and let the addon do it for you. Defi
 1.  Download the latest `Smart_Frame_Colorizer.zip` file from the [Releases](https://github.com/BlenPy/Blender-Smart-Frame-Colorizer/releases) page.
 2.  In Blender, go to `Edit` > `Preferences` > `Add-ons`.
 3.  Click `Install...` and select the `.zip` file you downloaded.
-4.  Enable the addon by checking the box next to "Smart Frame Colorizer".
+4.  Enable the addon by checking the box next to "Smart Frame Colorizer". (Requires Blender 5.0 or later)
 
 ---
 
@@ -51,7 +52,7 @@ In the Node Editor, press `N` to open the sidebar and click the **"Tool"** tab. 
 
 This is the "brain" of the addon. Go to `Edit` > `Preferences` > `Add-ons` and find "Smart Frame Colorizer".
 
-Set the **Color Mode** to **"By Rules"** to enable the system. The preferences are split into three tabs:
+Set the **Color Mode** to **"By Rules"** to enable the system. The preferences are split into four tabs:
 
 #### 🎨 **Palettes** Tab
 This is where you create your color sets.
@@ -60,29 +61,35 @@ This is where you create your color sets.
 2.  Select its `Sampling Mode` (e.g., `Uniform`).
 3.  Add colors to it using the `+` button in the right-hand list.
 
-#### 룰 **Rules** Tab
+#### 📦 **Node Groups** Tab (NEW)
+Organize multiple node types into custom groups to simplify your rules.
+
+1.  Click `+` to add a new Node Group (e.g., "Math Nodes").
+2.  Add members to the group by selecting their Category and Node Type.
+
+#### 📏 **Rules** Tab
 This is where you define the logic.
 
 1.  First, select which editor you want to create rules for: **Shader**, **Geometry**, or **Compositor**. Each editor has its own independent list of rules.
 2.  Click the `+` button to add a new rule.
 3.  **Set the Priority:** Use the **Up/Down arrows** to move the rule. **Rules are checked from top to bottom. The first one that matches wins.**
 4.  **Configure the Rule:**
-    * **Rule Type:** Choose `Keyword` or `Node Type`.
+    * **Rule Type:** Choose `Keyword`, `Node Type`, or `Node Group`.
     * **Mode:** Choose `Single Color` (and pick a color) or `Use Palette` (and select a palette you made).
 
 > **Example Rule:**
 > * **Editor:** `Shader`
-> * **Rule 1:** `Rule Type: Node Type` > `Node: Image Texture` > `Mode: Use Palette` > `Palette: Texture Pal`
-> * **Rule 2:** `Rule Type: Keyword` > `Keyword: Math` > `Mode: Single Color` > `Color: (Blue)`
+> * **Rule 1:** `Rule Type: Node Group` > `Node Group: Math Nodes` > `Mode: Use Palette` > `Palette: Math Colors`
+> * **Rule 2:** `Rule Type: Keyword` > `Keyword: Control` > `Mode: Single Color` > `Color: (Red)`
 >
-> Now, any frame containing an `Image Texture` node will get a color from your "Texture Pal," and any frame with "Math" in its label will turn blue.
+> Now, any frame containing a node defined in your "Math Nodes" group will get a color from your "Math Colors" palette, and any frame with "Control" in its label will turn red.
 
 #### ⚙️ **Settings** Tab
 General settings for the addon.
 
 * **Auto Color:** Automatically color frames when the node tree updates. Turn this off if you prefer to run updates manually.
-* **Config Import/Export:** Save or load your complete setup (all rules and palettes) from a `.json` file.
-* **Backward Compatibility:** This addon can successfully load `.json` files created by older versions. Old rules will be automatically placed in the **Shader** rule set.
+* **Config Import/Export:** Save or load your complete setup (all rules, node groups, and palettes) from a `.json` file.
+* **Maintenance:** Click "Refresh Node List" to clear the internal cache if newly added node types are not showing up in the dropdown menus.
 
 ---
 
